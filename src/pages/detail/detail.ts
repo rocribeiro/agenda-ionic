@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ContatoService } from '../../app/contato.service';
 
 /**
  * Generated class for the DetailPage page.
@@ -15,14 +16,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetailPage {
 
-  note;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.note = this.navParams.get("noteParam");
-    console.log('nav-param', this.note);
+  contato;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private contatoService: ContatoService, private alertCtrl:AlertController) {
+    this.contato = this.navParams.get("contatoParam");
+    console.log('nav-param', this.contato);
   }
 
+  onTrash() {
+    let confirm = this.alertCtrl.create({
+      title: "Excluir contato",
+      message: `Quer mesmo excluir esse contato: "${this.contato.nome}"?`,
+      buttons: [
+        {
+          text: "Não"
+        },
+        {
+          text: "Sim",
+          handler: () => {
+            this.contatoService.removeContato(this.contato);
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    //exibe
+    confirm.present();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailPage');
   }
+
 
 }

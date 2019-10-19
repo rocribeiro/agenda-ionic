@@ -6,7 +6,12 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>{{note.title}}</ion-title>
+    <ion-title>{{contato.nome}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onTrash()">
+      <ion-icon name="trash"></ion-icon>
+      </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -14,17 +19,18 @@
   <ion-list>
     
     <ion-item>
-      <ion-label fixed>Title</ion-label>
-      <ion-input type="text" value=""></ion-input>
+      <ion-label fixed>Nome</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="contato.nome"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label fixed>Date</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label fixed>Telefone</ion-label>
+      <ion-input type="text" [(ngModel)]="contato.telefone"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-textarea placeholder="Content"></ion-textarea>
+      <ion-label fixed>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="contato.telefone"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

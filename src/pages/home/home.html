@@ -1,22 +1,22 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Notable Notes
+      Lista de Cantatos
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let note of notes" (click)="onItemClick(note)">
+  <ion-card *ngFor="let contato of contatos" (click)="onItemClick(contato)">
     <ion-card-header>
-      {{note.date | date: 'dd/MM/yyyy'}}
+      {{contato.nome}}
     </ion-card-header>
     <ion-card-content>
       <ion-card-title>
-          {{note.title}}
+          {{contato.telefone}}
       </ion-card-title>
       <p>
-        {{note.content}}
+        {{contato.email}}
       </p>
     </ion-card-content>
   </ion-card>
