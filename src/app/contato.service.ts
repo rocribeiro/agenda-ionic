@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class ContatoService {
-    constructor(public db: AngularFireDatabase) {
-
+    constructor(private db: AngularFireDatabase) {
+        console.log("teste"+db);
     }
 
     contatos = [
@@ -29,7 +29,7 @@ export class ContatoService {
     ]
 
     removeContato(contato) {
-        this.db.object("/contatos/" + contato.$key).remove()
+        this.db.object("/dplistadecontatos/" + contato.$key).remove()
             .then(
                 x => console.log("contato deleted successfully")
             ).
@@ -40,7 +40,7 @@ export class ContatoService {
     }
     addContato(contato) {
         //this.contato.push(contato);
-        this.db.list("/contatos/").push({
+        this.db.list("/dplistadecontatos").push({
             nome: contato.nome,
             telefone: contato.telefone,
             email: contato.email
@@ -48,11 +48,11 @@ export class ContatoService {
     }
 
     fetchContatos() {
-        return this.db.list("/contatos");
+        return this.db.list("/dplistadecontatos");
     }
 
     editContato(contato) {
-        this.db.object("/contatos/" + contato.$key).update({
+        this.db.object("/dplistadecontatos/" + contato.$key).update({
             nome: contato.nome,
             telefone: contato.telefone,
             email: contato.email

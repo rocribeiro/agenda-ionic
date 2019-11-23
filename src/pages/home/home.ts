@@ -9,15 +9,19 @@ import {AngularFireDatabase} from 'angularfire2/database';
 })
 export class HomePage {
   contatos;
-  constructor(public navCtrl: NavController, public contatoService:ContatoService,db:AngularFireDatabase) {
-    //console.log(db);
+  constructor(public navCtrl: NavController, public contatoService:ContatoService,public db:AngularFireDatabase) {
+    console.log(db);
     //this.contatos = this.contatoService.contatos;
+    
   }
 
   ngOnInit (){
+   
     this.contatos = this.contatoService.fetchContatos();
    }
-   
+   fetchContatos() {
+    return this.db.list("/dplistadecontatos");
+}
 
   onItemClick (contato){
     this.navCtrl.push ('DetailPage', {contatoParam: contato });
