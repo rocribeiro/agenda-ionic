@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let contato of contatos" (click)="onItemClick(contato)">
+  <ion-card *ngFor="let contato of contatos  | async" (click)="onItemClick(contato)">
     <ion-card-header>
       {{contato.nome}}
     </ion-card-header>

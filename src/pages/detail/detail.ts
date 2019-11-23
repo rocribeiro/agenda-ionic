@@ -17,9 +17,12 @@ import { ContatoService } from '../../app/contato.service';
 export class DetailPage {
 
   contato;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private contatoService: ContatoService, private alertCtrl:AlertController) {
+  newContatoFlag = false;
+  deleteContatoFlag = false;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private contatoService: ContatoService, private alertCtrl: AlertController) {
     this.contato = this.navParams.get("contatoParam");
     console.log('nav-param', this.contato);
+    this.newContatoFlag = true;
   }
 
   onTrash() {
@@ -33,7 +36,8 @@ export class DetailPage {
         {
           text: "Sim",
           handler: () => {
-            this.contatoService.removeContato(this.contato);
+            this.deleteContatoFlag = true;
+            this.contatoService.removeContato(this.contato)
             this.navCtrl.pop();
           }
         }
@@ -45,6 +49,19 @@ export class DetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailPage');
   }
+
+ 
+
+
+ionViewWillLeave(){
+  if (this.newContatoFlag) {
+    if (this.contato.nome != "" && this.contato.telefone != "" && this.contato.email != "")
+      this.contatoService.addContato(this.contato);
+  }
+  else {
+    this.contatoService.editContato(this.contato);
+  }
+}
 
 
 }
